@@ -14,14 +14,9 @@ export const decCounter = number => {
 
 export const incCounterAsync = number => {
   return dispatch => {
-    setTimeout(() => dispatch(incCounter(number)), 2000);
-    setTimeout(
-      () =>
-        dispatch({
-          type: "INC_COUNTER",
-          payload: number
-        }),
-      1000
-    );
+    fetch("https://wrkm8.sse.codesandbox.io/")
+      .then(res => res.json())
+      .then(res => dispatch(incCounter(res.random_number)))
+      .catch(err => console.log(err));
   };
 };
